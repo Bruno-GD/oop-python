@@ -5,6 +5,6 @@ setup(
     version="1.0.0",
     description="Just a Python OOP tests",
     author="Bruno Golomb",
-    package_dir="src",
-    packages=[]
+    packages=["src"],
+    install_requires=[]
 )
