@@ -1,28 +1,22 @@
-from logging import getLogger as gL
-LOGGER = gL(__name__)
 class Yatzy:
     """
     Yahtzee game score calculator
     """
+
     ONE = 1
     TWO = 2
     THREE = 3
     FOUR = 4
     FIVE = 5
     SIX = 6
-    SCORES = {
-        "FULLHOUSE": 25,
-        "SMALLSTRAIGHT": 30,
-        "LARGESTRAIGHT": 40,
-        "YAHTZEE": 50
-    }
+    SCORES = {"FULLHOUSE": 25, "SMALLSTRAIGHT": 30, "LARGESTRAIGHT": 40, "YAHTZEE": 50}
 
     def __init__(self, *dices: int) -> None:
         # PUBLIC
         self.dices = list(dices)
         self.dices.sort()
         # PRIVATE
-        self.COUNTS = dict.fromkeys([1,2,3,4,5,6], 0)
+        self.COUNTS = dict.fromkeys([1, 2, 3, 4, 5, 6], 0)
         for die in self.dices:
             self.COUNTS[die] += 1
         self.__max = None
@@ -104,9 +98,9 @@ class Yatzy:
         """
         start = 0
         lastDie = self.dices[start]
-        if lastDie == self.dices[start+1]:
+        if lastDie == self.dices[start + 1]:
             start += 1
-        for die in self.dices[start+1:5]:
+        for die in self.dices[start + 1 : 5]:
             if lastDie + 1 != die:
                 return 0
             lastDie = die

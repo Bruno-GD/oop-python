@@ -1,4 +1,3 @@
-
 class DNI:
     """
     Class representing a DNI object
@@ -11,7 +10,9 @@ class DNI:
     validLength = int
 
     def __init__(
-        self, newDNI: str = "", *,
+        self,
+        newDNI: str = "",
+        *,
         validChars: str = "TRWAGMYFPDXBNJZSQVHLCKE",
         validLength: int = 9
     ) -> None:
@@ -42,7 +43,9 @@ class DNI:
         return self.isValidChar
 
     def validate(self) -> bool:
-        self.setValid(self.checkValidLength() and self.checkNumbers() and self.checkValidChar())
+        self.setValid(
+            self.checkValidLength() and self.checkNumbers() and self.checkValidChar()
+        )
         return self.getValid()
 
     # PRIVATE
@@ -63,5 +66,9 @@ class DNI:
         return len(self.getDNI()) == self.validLength
 
     def checkValidChar(self) -> bool:
-        self.setValidChar(self.checkValidLength() and self.checkNumbers() and self.calculateChar() == self.getChar())
+        self.setValidChar(
+            self.checkValidLength()
+            and self.checkNumbers()
+            and self.calculateChar() == self.getChar()
+        )
         return self.getValidChar()
