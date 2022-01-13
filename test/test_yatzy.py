@@ -87,3 +87,16 @@ def test_chance():
     assert Yatzy(2, 3, 1, 4, 5).chance() == sum([2, 3, 1, 4, 5])
     assert Yatzy(1, 1, 1, 1, 1).chance() == sum([1, 1, 1, 1, 1])
     assert Yatzy(2, 2, 3, 4, 1).chance() == sum([2, 2, 3, 4, 1])
+
+@pytest.mark.yatzy
+def test_pair():
+    assert Yatzy(1, 1, 2, 3, 4).pair() == 1 + 1
+    assert Yatzy(4, 4, 3, 3, 1).pair() == 4 + 4
+    assert Yatzy(1, 2, 3, 4, 5).pair() == 0
+
+@pytest.mark.yatzy
+def test_two_pair():
+    assert Yatzy(1, 1, 2, 2, 3).two_pair() == 1 + 1 + 2 + 2
+    assert Yatzy(2, 2, 4, 4, 5).two_pair() == 2 + 2 + 4 + 4
+    assert Yatzy(1, 2, 3, 4, 5).two_pair() == 0
+    assert Yatzy(1, 1, 2, 3, 4).two_pair() == 0
