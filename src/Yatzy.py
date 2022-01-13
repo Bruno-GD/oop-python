@@ -20,22 +20,44 @@ class Yatzy:
         for die in self.dices:
             self.COUNTS[die] += 1
         self.__max = None
-        self.__min = None
+
+        self.aces = self._aces
+        self.twos = self._twos
+        self.threes = self._threes
+        self.yahtzee = self._yahtzee
+        self.chance = self._chance
+        self.three_of_a_kind = self._three_of_a_kind
+        self.four_of_a_kind = self._four_of_a_kind
+        self.small_straight = self._small_straight
+        self.large_straight = self._large_straight
+        self.full_house = self._full_house
 
     # UPPER SECTION
-    def aces(self) -> int:
+    @classmethod
+    def aces(cls, *dices) -> int:
+        return cls(*dices).aces()
+
+    def _aces(self) -> int:
         """
         The sum of dice with the number 1
         """
         return self.COUNTS[self.ONE] * self.ONE
 
-    def twos(self) -> int:
+    @classmethod
+    def twos(cls, *dices) -> int:
+        return cls(*dices).twos()
+
+    def _twos(self) -> int:
         """
         The sum of dice with the number 2
         """
         return self.COUNTS[self.TWO] * self.TWO
 
-    def threes(self) -> int:
+    @classmethod
+    def threes(cls, *dices) -> int:
+        return cls(*dices).threes()
+
+    def _threes(self) -> int:
         """
         The sum of dice with the number 3
         """
@@ -60,7 +82,11 @@ class Yatzy:
         return self.COUNTS[self.SIX] * self.SIX
 
     # LOWER SECTION
-    def three_of_a_kind(self) -> int:
+    @classmethod
+    def three_of_a_kind(cls, *dices) -> int:
+        return cls(*dices).three_of_a_kind()
+
+    def _three_of_a_kind(self) -> int:
         """
         At least three dice the same
         Sum of all dice
@@ -70,7 +96,11 @@ class Yatzy:
             return sum(self.dices)
         return 0
 
-    def four_of_a_kind(self) -> int:
+    @classmethod
+    def four_of_a_kind(cls, *dices) -> int:
+        return cls(*dices).four_of_a_kind()
+
+    def _four_of_a_kind(self) -> int:
         """
         At least four dice the same
         Sum of all dice
@@ -80,7 +110,11 @@ class Yatzy:
             return sum(self.dices)
         return 0
 
-    def full_house(self) -> int:
+    @classmethod
+    def full_house(cls, *dices) -> int:
+        return cls(*dices).full_house()
+
+    def _full_house(self) -> int:
         """
         Three of one number and two of another
         Scores 25
@@ -90,7 +124,11 @@ class Yatzy:
             return self.SCORES["FULLHOUSE"]
         return 0
 
-    def small_straight(self) -> int:
+    @classmethod
+    def small_straight(cls, *dices) -> int:
+        return cls(*dices).small_straight()
+
+    def _small_straight(self) -> int:
         """
         Four sequential dice:
         (1-2-3-4, 2-3-4-5 or 3-4-5-6)
@@ -106,7 +144,11 @@ class Yatzy:
             lastDie = die
         return self.SCORES["SMALLSTRAIGHT"]
 
-    def large_straight(self) -> int:
+    @classmethod
+    def large_straight(cls, *dices) -> int:
+        return cls(*dices).large_straight()
+
+    def _large_straight(self) -> int:
         """
         Five sequential dice:
         (1-2-3-4-5 or 2-3-4-5-6)
@@ -119,7 +161,11 @@ class Yatzy:
         else:
             return 0
 
-    def yahtzee(self) -> int:
+    @classmethod
+    def yahtzee(cls, *dices) -> int:
+        return cls(*dices).yahtzee()
+
+    def _yahtzee(self) -> int:
         """
         All five dice the same
         Score 50
@@ -130,7 +176,11 @@ class Yatzy:
         else:
             return 0
 
-    def chance(self) -> int:
+    @classmethod
+    def chance(cls, *dices) -> int:
+        return cls(*dices).chance()
+
+    def _chance(self) -> int:
         """
         Any combination
         Sum of all dice
