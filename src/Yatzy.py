@@ -31,6 +31,8 @@ class Yatzy:
         self.small_straight = self._small_straight
         self.large_straight = self._large_straight
         self.full_house = self._full_house
+        self.pair = self._pair
+        self.two_pair = self._two_pair
 
     # UPPER SECTION
     @classmethod
@@ -186,6 +188,45 @@ class Yatzy:
         Sum of all dice
         """
         return sum(self.dices)
+
+    @classmethod
+    def pair(cls, *dices: int) -> int:
+        return cls(*dices).pair()
+
+    def _pair(self) -> int:
+        """
+        Any pair of same number
+        """
+        biggestPair = 0
+        for die in self.COUNTS:
+            if self.COUNTS[die] >= 2:
+                if die > biggestPair:
+                    biggestPair = die
+
+        return biggestPair + biggestPair
+
+    @classmethod
+    def two_pair(cls, *dices: int) -> int:
+        return cls(*dices).two_pair()
+
+    def _two_pair(self) -> int:
+        """
+        Two pair of same number
+        """
+        biggestFirstPair = 0
+        biggestSecondPair = 0
+        for die in self.COUNTS:
+            if self.COUNTS[die] >= 2:
+                if die > biggestFirstPair:
+                    biggestSecondPair = biggestFirstPair
+                    biggestFirstPair = die
+                elif die > biggestSecondPair:
+                    biggestSecondPair = die
+
+        if biggestFirstPair > 0 and biggestSecondPair > 0:
+            return biggestFirstPair + biggestFirstPair + biggestSecondPair + biggestSecondPair
+        else:
+            return 0
 
     # PRIVATE
     def __maxDieCount(self) -> int:
